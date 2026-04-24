@@ -1,0 +1,18 @@
+{
+  "id": "silicon",
+  "name": "The Silicon",
+  "version": "1.0.0",
+  "author": "Fundo V12",
+  "layoutStrategy": "LINEAR",
+  "capabilities": [
+    "no-photo"
+  ],
+  "tags": [
+    "Tech",
+    "Modern",
+    "Blue"
+  ],
+  "pricing": {
+    "premium": false
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "diplomat",
+  "name": "The Diplomat",
+  "version": "1.0.0",
+  "author": "Fundo V12",
+  "layoutStrategy": "LINEAR",
+  "capabilities": [
+    "no-photo"
+  ],
+  "tags": [
+    "Elegant",
+    "Soft",
+    "International"
+  ],
+  "pricing": {
+    "premium": false
+  }
+}

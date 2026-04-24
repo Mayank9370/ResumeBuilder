@@ -1,0 +1,18 @@
+{
+  "id": "alpine",
+  "name": "The Alpine",
+  "version": "1.0.0",
+  "author": "Fundo V12",
+  "layoutStrategy": "LINEAR",
+  "capabilities": [
+    "no-photo"
+  ],
+  "tags": [
+    "Swiss",
+    "Grid",
+    "Bold"
+  ],
+  "pricing": {
+    "premium": false
+  }
+}

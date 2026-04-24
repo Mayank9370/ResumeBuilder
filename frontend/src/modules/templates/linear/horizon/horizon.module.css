@@ -1,0 +1,83 @@
+/* 
+   Horizon Template Header Overrides 
+   Provides CSS Grid structural overrides to ParticleRenderer's layout
+*/
+
+.horizon-container .horizon-header-grid {
+  display: grid !important;
+  /* Two columns: 1st column expands, 2nd column fixed to photo size (80px) */
+  grid-template-columns: 1fr 80px !important;
+  gap: 16px;
+
+  /* 
+      Map areas to ensure proper placement regardless of DOM order: 
+      Row 1: Name      [Photo]
+      Row 2: Title     [Photo]
+      Row 3: Contacts  [Photo]
+    */
+  grid-template-areas:
+    "name photo"
+    "title photo"
+    "contact photo" !important;
+
+  align-items: center;
+}
+
+/* Force elements into layout grids */
+.horizon-container .horizon-header-name {
+  grid-area: name;
+  text-align: left !important;
+  margin-bottom: 6px !important;
+}
+
+/* 
+  Because ParticleRenderer does not place a unique class on the profession div directly,
+  we target the element right after the name using an adjacent sibling selector or by matching its standard class.
+*/
+.horizon-container .horizon-header-grid > h1 + div {
+  grid-area: title;
+  text-align: left !important;
+  font-size: 14px !important;
+  color: #6b7280 !important; /* Muted gray (text-gray-500) */
+  font-weight: 400 !important;
+  margin-bottom: 6px !important;
+}
+
+/* Contact Grid */
+.horizon-container .horizon-contact-grid {
+  grid-area: contact;
+  /* Override flex */
+  display: grid !important;
+  grid-template-columns: repeat(2, auto) !important;
+  gap: 6px 16px !important;
+  justify-content: start !important;
+  text-align: left !important;
+}
+
+/* Profile Photo */
+.horizon-container .photo-container {
+  grid-area: photo;
+  margin: 0 !important; /* remove flex default margins */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Ensure the image strictly obeys the 80x80 size */
+.horizon-container .photo-container img {
+  width: 80px !important;
+  height: 80px !important;
+  min-width: 80px !important;
+  min-height: 80px !important;
+  object-fit: cover !important;
+}
+
+/* Remove center text alignments imposed by ParticleRenderer globally for descendants */
+.horizon-container .horizon-header-grid > * {
+  justify-self: start;
+}
+
+/* Specifically align the photo block to the right edge */
+.horizon-container .photo-container {
+  justify-self: end !important;
+}

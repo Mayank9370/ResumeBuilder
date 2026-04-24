@@ -1,0 +1,12 @@
+{
+  "id": "horizon",
+  "name": "The Horizon",
+  "version": "1.0.0",
+  "author": "Antigravity",
+  "layoutStrategy": "LINEAR",
+  "capabilities": ["no-photo"],
+  "tags": ["Innovative", "Minimal", "Balanced"],
+  "pricing": {
+    "premium": false
+  }
+}

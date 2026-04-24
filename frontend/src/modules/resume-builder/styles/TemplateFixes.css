@@ -1,0 +1,174 @@
+/* Template Layout Fixes */
+/* Target specific templates to enforce safe margins and prevent overflow */
+
+/* ============================================
+   TEMPLATE-SPECIFIC PAGE CONTAINER RULES
+   ============================================ */
+
+/* DEFAULT - All templates use hidden overflow for proper pagination */
+.resume-page {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  box-sizing: border-box;
+  height: 1123px !important;
+  min-height: 1123px !important;
+  max-height: 1123px !important;
+}
+
+/* Glass Overlay & Geometric Modern - overflow hidden inherited from .resume-page */
+
+/* ============================================
+   DECORATION LAYER ISOLATION CONTRACT
+   ============================================ */
+/* Background decorative layers (template.regions.background[]) are rendered as  */
+/* `absolute` divs inside .resume-page. This CSS ensures they NEVER contribute   */
+/* to layout flow or push content height, regardless of their visual size.        */
+.resume-page>[class*="absolute"],
+.resume-page>.resume-decoration-layer {
+  position: absolute !important;
+  /* Force out of flow */
+  pointer-events: none;
+  /* Non-interactive */
+}
+
+/* ============================================
+   CONTENT LAYER ELEVATION
+   ============================================ */
+/* Ensure relative/z-10 content containers always sit above decoration layers   */
+.resume-page>.relative,
+.resume-page>[class*="z-10"],
+.resume-page>[class*="relative"] {
+  position: relative;
+  z-index: 2;
+  /* Always above absolute bg layers (z-index: 0 or -z-0) */
+}
+
+/* ============================================
+   LEGACY TEMPLATE FIXES
+   ============================================ */
+
+/* 4. Minimalist Split */
+.resume-template-minimalist-split .layout-root-node {
+  /* box-sizing is key here */
+  box-sizing: border-box;
+}
+
+/* Formatting Contract Enforcement */
+/* Spacing rules handled below... */
+
+/* --- FORMATTING CONTRACT ENFORCEMENT --- */
+/* Ensure Rich Text content respects the centralized spacing variables */
+
+/* 1. Wrapper Spacing */
+/* 1. Wrapper Spacing - "Rich Text" is the new contract */
+.particle-narrative,
+.rich-text {
+  margin-bottom: var(--resume-spacing-paragraph, 0.5rem);
+  line-height: var(--resume-line-height-body, 1.5);
+  font-size: var(--resume-font-size-body, 0.875rem);
+  color: var(--resume-color-text, inherit);
+  display: flow-root;
+  /* Safe Fix: Contain internal floats/margins */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* 2. Internal Paragraphs (Rich Text) - Increased Specificity */
+.particle-narrative p,
+.rich-text p {
+  margin-bottom: var(--resume-spacing-paragraph, 0.5rem) !important;
+}
+
+/* 3. Internal Lists (Rich Text) */
+.particle-narrative ul,
+.rich-text ul,
+.particle-narrative ol,
+.rich-text ol {
+  margin-bottom: var(--resume-spacing-paragraph, 0.5rem);
+  padding-left: 1.25rem;
+  /* Standard indent */
+}
+
+/* 4. List Items */
+.particle-narrative li,
+.rich-text li {
+  /* List items get 50% of paragraph spacing for tighter packing */
+  margin-bottom: calc(var(--resume-spacing-paragraph, 0.5rem) * 0.5);
+}
+
+/* 5. Safe Separation: Remove margin from last element to strictly enforce "Space Between" */
+.particle-narrative p:last-child,
+.rich-text p:last-child,
+.particle-narrative ul:last-child,
+.rich-text ul:last-child,
+.particle-narrative ol:last-child,
+.rich-text ol:last-child,
+.particle-narrative li:last-child,
+.rich-text li:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 6. Bullet Items (Standalone) */
+.particle-bullet-item {
+  margin-bottom: var(--resume-spacing-paragraph, 0.5rem);
+  line-height: var(--resume-line-height-body, 1.5);
+  font-size: var(--resume-font-size-body, 0.875rem);
+  color: var(--resume-color-text, inherit);
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* 7. Section Spacing Semantic Fix */
+.particle-section-discriminator {
+  margin-top: var(--resume-spacing-section, 1rem);
+  /* Prevent margin collapse to ensure accurate height measurement */
+  display: flow-root;
+}
+
+/* 8. Atomic Header Stabilization */
+/* Ensure headers create a new Block Formatting Context (BFC) */
+/* This prevents margin collapse from extending outside the header block, */
+/* ensuring that getBoundingClientRect() + gap calculation is stable across measurement/render passes. */
+[data-pagination-header] {
+  display: flow-root;
+}
+
+/* Template Specific Fixes (Bento Box / Styled Wrapper Visibility) */
+.modern-mosaic-bento-box:empty,
+.modern-mosaic-bento-box:has(> .hidden),
+.modern-mosaic-bento-box:has(> :empty),
+.modern-mosaic-bento-box:has([data-missing-section]),
+.compact-cards-bento-box:empty,
+.compact-cards-bento-box:has(> .hidden),
+.compact-cards-bento-box:has(> :empty),
+.compact-cards-bento-box:has([data-missing-section]),
+.retro-pop-bento-box:empty,
+.retro-pop-bento-box:has(> .hidden),
+.retro-pop-bento-box:has(> :empty),
+.retro-pop-bento-box:has([data-missing-section]) {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+/* 9. Linear Layout Specific Typographic Rhythms */
+/* Linear templates should flow like continuous documents. 
+   We tighten up the excessive space variables here so they fit neatly on A4s. */
+.resume-layout-strategy-linear {
+  --resume-spacing-paragraph: 0.25rem !important;
+  /* Tighten space between bullets */
+  --resume-spacing-entry: 0.75rem !important;
+  /* Tighter space between jobs */
+  --resume-spacing-section: 1.25rem !important;
+  /* Base standard space between domains */
+}
+
+/* Strip bottom margin from last element of linear sections to prevent collapse bloat */
+.resume-layout-strategy-linear .particle-section-discriminator:last-child {
+  margin-bottom: 0 !important;
+}
+
+.resume-layout-strategy-linear .particle-narrative {
+  margin-bottom: var(--resume-spacing-paragraph) !important;
+}

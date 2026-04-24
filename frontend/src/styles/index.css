@@ -1,0 +1,266 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Asap:ital,wght@0,400;0,700;1,400;1,700&family=Barlow:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Bitter:ital,wght@0,400;0,700;1,400;1,700&family=Cabin:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Cairo:wght@400;700&family=Catamaran:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=EB+Garamond:ital,wght@0,400;0,600;0,800;1,400;1,600;1,800&family=Fira+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Fjalla+One&family=Heebo:wght@400;700&family=Hind:wght@400;600;700&family=Inconsolata:wght@400;700&family=Inter:wght@400;600;700&family=Josefin+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Karla:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Manrope:wght@400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Mulish:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Oswald:wght@400;600;700&family=Oxygen:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Quicksand:wght@400;600;700&family=Raleway:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Signika:wght@400;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Teko:wght@400;600;700&family=Titillium+Web:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Varela+Round&family=Work+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+@import "tailwindcss";
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ========================================
+   GLOBAL RESUME DESIGN TOKENS
+   ======================================== */
+:root {
+  /* Safe Padding - Minimum margin from page edges */
+  --resume-safe-padding-x: 10mm;
+  --resume-safe-padding-y: 6mm;
+
+  /* Z-Index Layering */
+  --resume-z-decorative: 1;
+  --resume-z-content: 10;
+  --resume-z-interactive: 20;
+}
+
+/* Resume Section Pagination Rules */
+/* Live preview - Atomic sections (no splitting) */
+.resume-section-shell,
+[data-pagination-section] {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Print / PDF - Reinforced atomic sections and clean stacking */
+.print-mode .resume-page,
+.print-mode [data-pagination-section] {
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+  margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Allow individual items within very large sections to break if needed */
+.print-mode .resume-section-item {
+  break-inside: auto;
+}
+
+/* Rich Text List Fixes for Resume Preview */
+/* Tailwind preflight removes these, so we restore them for rich text content */
+.particle-narrative ul,
+.particle-bullet-item ul,
+.resume-description ul,
+.section-content ul {
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.particle-narrative ol,
+.particle-bullet-item ol,
+.resume-description ol,
+.section-content ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem !important;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.particle-narrative li,
+.particle-bullet-item li,
+.resume-description li,
+.section-content li {
+  margin-bottom: 0.125rem;
+  display: list-item !important; /* Force display: list-item in case flex/block overrides it */
+}
+
+/* Rich Text Color Inheritance - CRITICAL FIX */
+/* Ensure all text content inherits color from parent container */
+.particle-narrative,
+.particle-narrative *,
+.particle-bullet-item,
+.particle-bullet-item *,
+.resume-description,
+.resume-description *,
+.section-content,
+.section-content * {
+  color: inherit !important;
+}
+
+/* Override Quill/Editor inline styles that may inject colors */
+.particle-narrative p,
+.particle-narrative span,
+.particle-narrative div,
+.particle-bullet-item p,
+.particle-bullet-item span,
+.particle-bullet-item div {
+  color: inherit !important;
+}
+
+/* Runtime Contrast Class - Phase 4 */
+/* Allows dynamic text color resolution via inline CSS variable */
+.runtime-contrast {
+  color: var(--runtime-text-color, inherit) !important;
+}
+
+.runtime-contrast *:not(a) {
+  color: var(--runtime-text-color, inherit) !important;
+}
+
+/* Phase 5: Styling System Enforcement */
+/* Force all templates to respect engine-level typography tokens */
+.particle-section-title {
+  font-size: var(--resume-font-size-h2) !important;
+  line-height: var(--resume-line-height-body, 1.5);
+  margin-bottom: var(
+    --resume-spacing-header,
+    1rem
+  ); /* Allow templates to override spacing if needed, but provide default */
+}
+
+/* Using !important for font sizes to override template-specific Tailwind classes */
+.particle-job-title {
+  font-size: var(--resume-font-size-h3) !important;
+}
+
+.particle-narrative,
+.particle-bullet-item {
+  font-size: var(--resume-font-size-body) !important;
+  line-height: var(--resume-line-height-body, 1.5) !important;
+  margin-bottom: var(--resume-spacing-paragraph, 0.5rem);
+}
+
+.particle-meta {
+  font-size: var(--resume-font-size-small) !important;
+}
+
+/* Quill Rich Text Editor Alignment Support */
+/* These classes are generated by ReactQuill and need to work in preview */
+.ql-align-left {
+  text-align: left !important;
+}
+
+.ql-align-center {
+  text-align: center !important;
+}
+
+.ql-align-right {
+  text-align: right !important;
+}
+
+.ql-align-justify {
+  text-align: justify !important;
+}
+
+/* Apply alignment to paragraphs within rich text */
+.particle-narrative .ql-align-left,
+.particle-bullet-item .ql-align-left,
+.summary-content .ql-align-left {
+  text-align: left !important;
+}
+
+.particle-narrative .ql-align-center,
+.particle-bullet-item .ql-align-center,
+.summary-content .ql-align-center {
+  text-align: center !important;
+}
+
+.particle-narrative .ql-align-right,
+.particle-bullet-item .ql-align-right,
+.summary-content .ql-align-right {
+  text-align: right !important;
+}
+
+.particle-narrative .ql-align-justify,
+.particle-bullet-item .ql-align-justify,
+.summary-content .ql-align-justify {
+  text-align: justify !important;
+}
+
+/* ========================================
+   NUCLEAR TYPOGRAPHY RESET (CRITICAL)
+   ======================================== */
+/* 
+   Ensures that when a Tailwind font class (e.g. font-playfair) is applied 
+   to the .resume-page container, it Cascades down to all text elements,
+   overriding any specific font-family definitions in templates or children.
+   
+   ALSO: Strictly prohibits character-level splitting and browser hyphens
+   to ensure professional document typography across all sections.
+*/
+.resume-page,
+.resume-page * {
+  font-family: inherit !important;
+  word-break: normal !important; /* Strictly prohibit character-level splitting */
+  overflow-wrap: break-word !important; /* Prioritize shifting whole words to the next line */
+  hyphens: none !important; /* Disable browser-inserted hyphens */
+  white-space: normal; /* Ensure standard wrapping behavior */
+}
+
+/* Protect Icons (if any) from forced inheritance */
+.resume-page[class*="font-"] i,
+.resume-page[class*="font-"] svg {
+  font-family: inherit !important;
+}
+
+/* ========================================
+   TEMPLATE SPECIFIC OVERRIDES (BORDER FIXES)
+   ======================================== */
+
+/* Golden Sidebar: Aggressive Reset */
+.resume-template-golden-sidebar .layout-sidebar,
+.resume-template-golden-sidebar .layout-main,
+.resume-template-golden-sidebar .layout-sidebar::before,
+.resume-template-golden-sidebar .layout-sidebar::after,
+.resume-template-golden-sidebar .layout-main::before,
+.resume-template-golden-sidebar .layout-main::after {
+  border: none !important;
+  border-right: none !important;
+  border-left: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Neo Digital: Fine-tune border for dark theme */
+.resume-template-neo-digital .layout-sidebar {
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: none !important;
+}
+
+/* Brutal Sharp: Container Fixes */
+.resume-template-brutal-sharp {
+  box-shadow: 8px 8px 0px black !important;
+  margin-right: 8px !important;
+  margin-bottom: 8px !important;
+  box-sizing: border-box !important;
+  background-color: #fdba74 !important; /* Orange 300 */
+  padding: 2rem !important;
+}
+
+/* CRITICAL: Force the container to respect A4 bounds and not stretch downward */
+.resume-page.resume-template-brutal-sharp {
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Ensure inner stacking children (the white box) also fill the remaining space without clipping */
+.resume-page.resume-template-brutal-sharp > .layout-stack,
+.resume-page.resume-template-modern-minimal > .layout-stack,
+.resume-page.resume-template-professional-clean > .layout-stack {
+  min-height: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+}

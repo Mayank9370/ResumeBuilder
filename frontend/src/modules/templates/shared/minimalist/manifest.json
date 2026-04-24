@@ -1,0 +1,18 @@
+{
+    "id": "minimalist",
+    "name": "Minimalist",
+    "version": "1.0.0",
+    "author": "Fundo Legacy",
+    "layoutStrategy": "single-column",
+    "capabilities": [
+        "no-photo"
+    ],
+    "tags": [
+        "ATS Optimized",
+        "Minimal",
+        "Clean"
+    ],
+    "pricing": {
+        "premium": false
+    }
+}
