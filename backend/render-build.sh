@@ -9,6 +9,9 @@ npm install
 echo "🔧 Generating Prisma client..."
 npx prisma generate
 
+echo "🗄️ Running database migrations..."
+npx prisma migrate deploy
+
 echo "🌐 Installing Google Chrome for Puppeteer..."
 apt-get update -qq && apt-get install -y -qq wget gnupg ca-certificates > /dev/null 2>&1
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-archive-keyring.gpg
