@@ -17,9 +17,9 @@ const AuthSuccess = () => {
                 // unless we are using it for an Authorization header.
                 // However, the backend logic sends it for a reason.
                 
-                // For this implementation, we will primarily rely on the HttpOnly cookie 
-                // set by the backend for security. 
-                // We trigger a fetchUser() to validate the session.
+                // Save the token to localStorage to prevent cross-origin issues
+                // relying only on cookies fails on Safari/Brave due to 3rd-party cookie blocking
+                localStorage.setItem('token', token);
                 
                 try {
                     await fetchUser();

@@ -18,10 +18,11 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      // We rely on HttpOnly cookies, so we just check /me endpoint
-      // Ensure withCredentials is true to send cookies
+      // Read token from localStorage (fallback to cookies if present)
+      const token = localStorage.getItem('token');
       const response = await axios.get(`${backendUrl}/api/auth/me`, {
-        withCredentials: true
+        withCredentials: true,
+        headers: token ? { Authorization: `Bearer ${token}` } : {}
       });
 
       if (response.data.success) {
@@ -48,11 +49,17 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post(`${backendUrl}/api/auth/logout`, {}, { withCredentials: true });
-      setUser(null);
-      window.location.href = '/login';
+      const token = localStorage.getItem('token');
+      await axios.post(`${backendUrl}/api/auth/logout`, {}, { 
+        withCredentials: true,
+        headers: token ? { Authorization: `Bearer ${token}` } : {}
+      });
     } catch (error) {
       console.error('Logout failed:', error);
+    } finally {
+      localStorage.removeItem('token');
+      setUser(null);
+      window.location.href = '/login';
     }
   };
 
