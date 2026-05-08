@@ -1,29 +1,33 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Star, Upload, FileText, Sparkles } from 'lucide-react';
+import '@/modules/home/styles/home.css';
 
 const DashboardHeader = ({ user, resumeCount, onCreate, onImport }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="bg-white border-b border-slate-200 py-16 px-6 text-center relative overflow-hidden">
-            {/* Background Blobs (Matches Hero) */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0 opacity-30">
-                <div className="absolute top-[-50%] left-[-10%] w-[600px] h-[600px] bg-indigo-100/50 rounded-full blur-3xl mix-blend-multiply"></div>
-                <div className="absolute bottom-[-50%] right-[-10%] w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-3xl mix-blend-multiply"></div>
-            </div>
+        <div className="home-hero-bg border-b border-slate-200 py-20 px-6 text-center relative overflow-hidden">
+            {/* Decorative blobs from home theme */}
+            <div className="home-blob home-blob-purple" style={{ width: 600, height: 600, top: '-20%', left: '-10%' }} />
+            <div className="home-blob home-blob-pink" style={{ width: 500, height: 500, bottom: '-15%', right: '-8%' }} />
 
             <div className="max-w-4xl mx-auto relative z-10">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 text-indigo-700 rounded-full text-xs font-bold mb-6 tracking-wide uppercase shadow-sm">
-                    <Sparkles size={12} fill="currentColor" />
-                    {user ? `Welcome Back, ${user.name.split(' ')[0]}!` : 'Start Building Today'}
+                <div className="inline-flex items-center justify-center mb-6">
+                    <span className="home-section-badge">
+                        <Sparkles size={12} fill="currentColor" />
+                        {user ? `Welcome Back, ${user.name.split(' ')[0]}!` : 'Start Building Today'}
+                    </span>
                 </div>
 
                 <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                    {user ? "Ready to update your resume?" : "Resume Templates for 2025"}
+                    {user ? "Ready to update your " : "Resume Templates for "}
+                    <span className="home-gradient-text">
+                        {user ? "resume?" : "2025"}
+                    </span>
                 </h1>
 
-                <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+                <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
                     {user
                         ? (resumeCount > 0
                             ? `You have ${resumeCount} resume${resumeCount !== 1 ? 's' : ''} saved. create a new one or edit an existing profile.`
@@ -35,14 +39,14 @@ const DashboardHeader = ({ user, resumeCount, onCreate, onImport }) => {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
                     <button
                         onClick={onCreate}
-                        className="w-full sm:w-auto px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-full shadow-xl shadow-slate-900/20 transition-all duration-200 flex items-center justify-center gap-2 transform hover:-translate-y-1"
+                        className="home-btn-primary font-bold px-8 py-3.5 rounded-full flex items-center justify-center gap-2 w-full sm:w-auto"
                     >
                         <Star size={20} className="text-yellow-400 fill-yellow-400" /> Create New Resume
                     </button>
                     {/* IMPORT RESUME BUTTON */}
                     <button
                         onClick={onImport}
-                        className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 font-bold rounded-full border-2 border-slate-200 hover:border-indigo-200 hover:text-indigo-600 transition-all duration-200 flex items-center justify-center gap-2 transform hover:-translate-y-1"
+                        className="home-btn-secondary font-bold px-8 py-3.5 rounded-full flex items-center justify-center gap-2 w-full sm:w-auto bg-white"
                     >
                         <Upload size={20} /> Import Resume
                     </button>

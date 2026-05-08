@@ -4,6 +4,7 @@ import TemplateGallery from '@/modules/resume-builder/components/TemplateGallery
 import { Sparkles, CheckCircle, Smartphone, Lock, ArrowRight, LayoutDashboard, UploadCloud } from 'lucide-react';
 import Navbar from '@/shared/components/Navbar'; // Assuming global navbar
 import { useAuth } from '@/context/AuthContext';
+import '@/modules/home/styles/home.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -78,12 +79,12 @@ const ResumeLanding = () => {
                     <div className="flex flex-col items-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <Link
                             to="/my-resumes"
-                            className="bg-indigo-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-500/30 flex items-center gap-2 transform hover:-translate-y-1"
+                            className="home-btn-primary font-bold text-lg px-8 py-4 rounded-full flex items-center gap-2 w-full sm:w-auto justify-center"
                         >
                             <LayoutDashboard size={20} />
                             Go to My Resumes
                         </Link>
-                        <p className="text-indigo-600 font-medium text-sm bg-indigo-50 px-4 py-1 rounded-full">
+                        <p className="text-indigo-600 font-medium text-sm bg-indigo-50 px-4 py-1.5 rounded-full shadow-sm">
                             Welcome back, {user.name?.split(' ')[0]}! You have {user.resumeCount + user.sourceResumeCount} resume{user.resumeCount + user.sourceResumeCount !== 1 ? 's' : ''} saved.
                         </p>
                     </div>
@@ -95,14 +96,14 @@ const ResumeLanding = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button
                     onClick={() => document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' })}
-                    className="bg-slate-900 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+                    className="home-btn-primary font-bold px-10 py-4 rounded-full text-lg flex items-center justify-center gap-2 w-full sm:w-auto"
                 >
                     Start Building Now
                 </button>
-                <div className="text-slate-300 font-medium hidden sm:block">or</div>
+                <div className="text-slate-400 font-medium hidden sm:block">or</div>
                 <button
                     onClick={handleImportClick}
-                    className="bg-white text-slate-700 border-2 border-slate-200 px-8 py-4 rounded-full font-bold text-lg hover:border-indigo-200 hover:text-indigo-600 transition-all shadow-sm hover:shadow-md flex items-center gap-2 transform hover:-translate-y-1"
+                    className="home-btn-secondary bg-white font-bold px-8 py-4 rounded-full text-lg flex items-center justify-center gap-2 w-full sm:w-auto"
                 >
                     <UploadCloud size={20} />
                     Import Resume
@@ -133,21 +134,21 @@ const ResumeLanding = () => {
             />
 
             {/* HERO SECTION */}
-            <div className="relative bg-white border-b border-slate-200 pt-32 pb-20 px-6 overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0 opacity-30">
-                    <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-3xl mix-blend-multiply" />
-                    <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-indigo-100/40 rounded-full blur-3xl mix-blend-multiply" />
-                </div>
+            <div className="home-hero-bg relative border-b border-slate-200 pt-32 pb-20 px-6 overflow-hidden">
+                <div className="home-blob home-blob-purple" style={{ width: 800, height: 800, top: '-20%', right: '-10%' }} />
+                <div className="home-blob home-blob-pink" style={{ width: 600, height: 600, bottom: '-20%', left: '-10%' }} />
 
                 <div className="max-w-7xl mx-auto text-center relative z-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 text-indigo-700 rounded-full text-xs font-bold mb-6 tracking-wide uppercase shadow-sm">
-                        <Sparkles size={12} />
-                        Trusted by 10,000+ Professionals
+                    <div className="inline-flex items-center justify-center mb-6">
+                        <span className="home-section-badge">
+                            <Sparkles size={12} />
+                            Trusted by 10,000+ Professionals
+                        </span>
                     </div>
                     <h1 className="text-5xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight leading-tight">
-                        Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Dream Resume</span> <br className="hidden md:block" /> in Minutes.
+                        Build Your <span className="home-gradient-text">Dream Resume</span> <br className="hidden md:block" /> in Minutes.
                     </h1>
-                    <p className="text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+                    <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
                         Professional templates, real-time preview, and instant downloads. Create an account to save your progress and access your resumes from any device.
                     </p>
 
@@ -174,8 +175,8 @@ const ResumeLanding = () => {
             {/* TEMPLATE GALLERY */}
             <div id="gallery" className="max-w-7xl mx-auto px-6 py-20">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl font-bold text-slate-900">Choose a Template to Start</h2>
-                    <p className="text-slate-500 mt-4">Pick a design you love. Customization happens after you sign in.</p>
+                    <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Choose a Template to Start</h2>
+                    <p className="text-slate-500 mt-4 text-base">Pick a design you love. Customization happens after you sign in.</p>
                 </div>
 
                 {/* We reuse the existing gallery. It handles "Not Logged In" by redirecting to Login on click. */}

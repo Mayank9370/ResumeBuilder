@@ -346,15 +346,21 @@ const ResumeBuilder = () => {
       });
 
       // 🛡️ JIT Hydration Check: Ensure Redux is ready and VALID before we append
-      // This covers the race condition where the Auto-Heal effect hasn't run yet
+      // This covers the race condition where the Auto-Heal effect hasn't run yet.
+      // 🐛 BUG FIX: The original guard `resumeData.section_order.length > 0` prevented
+      // hydration when adding the VERY FIRST section on a new resume (section_order is
+      // still empty at that point). This caused personal_info to remain empty in Redux,
+      // making contact fields disappear from the preview on first section add.
+      // FIX: Always hydrate when Redux is invalid (missing personal_info), regardless
+      // of section count. normalizeResumeData handles empty section lists gracefully.
       const isReduxInvalid =
         !reduxState?.sections?.allIds ||
         reduxState.sections.allIds.length === 0 ||
         !reduxState.sections.byId["personal_info"];
 
-      if (isReduxInvalid && resumeData.section_order.length > 0) {
+      if (isReduxInvalid) {
         console.warn(
-          "[CREATE SECTION] JIT Hydration triggered (Invalid State Detected)",
+          "[CREATE SECTION] JIT Hydration triggered (personal_info missing from Redux — syncing local state)",
         );
         const normalized = normalizeResumeData(resumeData);
         dispatch(loadResume(normalized));

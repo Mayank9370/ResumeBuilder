@@ -197,7 +197,7 @@ const ResumeDashboard = () => {
       {recentResumes.length > 0 && (
         <div className="max-w-7xl mx-auto px-6 pt-12 pb-4">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-slate-900">Recent Resumes</h2>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Recent Resumes</h2>
             <button
               onClick={() => navigate('/my-resumes')}
               className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 hover:underline"
@@ -274,7 +274,7 @@ const ResumeDashboard = () => {
       {/* TEMPLATE GALLERY SECTION */}
       <div id="template-gallery" className="max-w-7xl mx-auto px-6 py-12">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-bold text-slate-900">Choose a Template</h2>
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Choose a Template</h2>
           <button onClick={() => navigate('/my-resumes')} className="text-indigo-600 font-medium hover:underline">
             View My Resumes ({recentResumes.length > 0 ? 'All' : '0'})
           </button>

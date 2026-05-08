@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast';
 
 // Import your existing components
 import ResumeBuilder from "@/modules/resume-builder/pages/ResumeBuilder";
+import HomePage from "@/modules/home/pages/HomePage";
 import MyResumes from "@/modules/resume-builder/pages/MyResumes";
 import ResumeLanding from "@/modules/resume-builder/pages/ResumeLanding";
 import ResumeDashboard from "@/modules/resume-builder/pages/ResumeDashboard";
@@ -21,10 +22,12 @@ import "@/styles/App.css";
 const Layout = ({ children }) => {
     const location = useLocation();
     const isPreview = location.pathname.startsWith('/preview');
+    // HomePage has its own HomeNavbar — suppress the shared Navbar there
+    const isHome = location.pathname === '/' || location.pathname === '/templates';
     
     return (
         <div className="min-h-screen bg-gray-50">
-            {!isPreview && <Navbar />}
+            {!isPreview && !isHome && <Navbar />}
             {children}
         </div>
     );
@@ -38,8 +41,10 @@ function App() {
         <Router>
           <Layout>
               <Routes>
-                  {/* Home redirects to landing page */}
-                  <Route path="/" element={<ResumeLanding />} />
+                  {/* Home — new premium landing page */}
+                  <Route path="/" element={<HomePage />} />
+                  {/* /templates — alias for the existing ResumeLanding gallery */}
+                  <Route path="/templates" element={<ResumeLanding />} />
 
                   {/* Your existing resume pages */}
                   <Route path="/resume" element={<ResumeLanding />} />

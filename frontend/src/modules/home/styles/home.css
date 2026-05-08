@@ -1,0 +1,325 @@
+/* ================================================
+   HOME PAGE — SCOPED CSS
+   All rules namespaced under .home-page
+   ZERO global style leakage
+   ================================================ */
+
+/* ---- Background gradient system ---- */
+.home-page {
+  background: #ffffff;
+  overflow-x: hidden;
+}
+
+.home-hero-bg {
+  background: 
+    radial-gradient(circle at 15% 10%, rgba(244, 114, 182, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(99, 102, 241, 0.02) 0%, transparent 50%),
+    linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+}
+
+.home-features-bg {
+  background: #ffffff;
+  border-top: 1px solid rgba(241, 245, 249, 0.8);
+}
+
+.home-templates-bg {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-top: 1px solid rgba(226, 232, 240, 0.4);
+}
+
+.home-cta-bg {
+  background: 
+    radial-gradient(circle at 50% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+    linear-gradient(135deg, #fdf4ff 0%, #fef3f2 100%);
+}
+
+/* ---- Decorative blobs ---- */
+.home-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-blob-pink {
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.06) 0%, transparent 70%);
+}
+
+.home-blob-purple {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+}
+
+.home-blob-orange {
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.04) 0%, transparent 70%);
+}
+
+.home-blob-indigo {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.04) 0%, transparent 70%);
+}
+
+.home-blob-white {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+}
+
+/* ---- Gradient text (Now Solid Black) ---- */
+.home-gradient-text {
+  color: #0f172a;
+}
+
+.home-gradient-text-alt {
+  color: #0f172a;
+}
+
+/* ---- Gradient buttons ---- */
+.home-btn-primary {
+  background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);
+}
+
+.home-btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.45);
+}
+
+.home-btn-secondary {
+  background: transparent;
+  color: #4f46e5;
+  border: 1.5px solid #c4b5fd;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.home-btn-secondary:hover {
+  background: #f5f3ff;
+  border-color: #7c3aed;
+  transform: translateY(-2px);
+}
+
+/* ---- Navbar ---- */
+.home-navbar {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.home-navbar-logo-text {
+  color: #0f172a;
+}
+
+/* ---- Resume mock card composition ---- */
+.home-mock-resume {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.07),
+    0 20px 50px -10px rgba(99, 102, 241, 0.18),
+    0 0 0 1px rgba(226, 232, 240, 0.6);
+  overflow: hidden;
+  position: relative;
+  transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+  transition: transform 0.4s ease;
+}
+
+.home-mock-resume:hover {
+  transform: perspective(1000px) rotateY(-2deg) rotateX(1deg) translateY(-4px);
+}
+
+.home-mock-header {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}
+
+.home-floating-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(226, 232, 240, 0.5);
+  position: absolute;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+/* ---- Template cards on home ---- */
+.home-template-card {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.home-template-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 12px 30px rgba(99, 102, 241, 0.15),
+    0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.home-template-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(79, 70, 229, 0.85) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 16px;
+}
+
+.home-template-card:hover .home-template-card-overlay {
+  opacity: 1;
+}
+
+/* ---- Trust metric chips ---- */
+.home-stat-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: #7c3aed;
+}
+
+.home-stat-label {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ---- Section badge ---- */
+.home-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(219, 39, 119, 0.06));
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  color: #7c3aed;
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ---- Subtle float animation ---- */
+@keyframes home-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.home-float-slow {
+  animation: home-float 5s ease-in-out infinite;
+}
+
+.home-float-medium {
+  animation: home-float 3.5s ease-in-out infinite;
+  animation-delay: 0.8s;
+}
+
+/* ---- Divider gradient ---- */
+.home-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(124, 58, 237, 0.2) 30%,
+    rgba(219, 39, 119, 0.2) 70%,
+    transparent 100%
+  );
+}
+
+/* ---- Company logo strip ---- */
+.home-company-logo {
+  color: #94a3b8;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.03em;
+  transition: color 0.2s ease;
+}
+
+.home-company-logo:hover {
+  color: #64748b;
+}
+
+/* ---- Responsive scroll for template row on mobile ---- */
+@media (max-width: 767px) {
+  .home-templates-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 12px;
+  }
+
+  .home-templates-row::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .home-templates-row::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 99px;
+  }
+
+  .home-templates-row::-webkit-scrollbar-thumb {
+    background: #c4b5fd;
+    border-radius: 99px;
+  }
+
+  .home-templates-row .home-template-card {
+    min-width: 220px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+}
+
+/* ---- Feature Cards ---- */
+.home-feature-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+.home-feature-card:hover {
+  transform: translateY(-4px);
+  background: #ffffff;
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.08);
+}
+
+.home-feature-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.home-feature-card:hover .home-feature-icon-wrapper {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}

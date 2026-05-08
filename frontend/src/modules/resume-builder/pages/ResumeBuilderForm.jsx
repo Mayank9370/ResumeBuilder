@@ -78,7 +78,8 @@ const ResumeBuilderForm = ({
                 <p className="text-slate-500 text-lg">
                   {activeStep.key === "personal_info"
                     ? "What's the best way for employers to contact you?"
-                    : (activeStep.key === "summary" || activeStep.key === "professional_summary")
+                    : activeStep.key === "summary" ||
+                        activeStep.key === "professional_summary"
                       ? "Briefly describe your professional background."
                       : activeStep.key === "education"
                         ? "Tell us about your education history."
@@ -119,7 +120,8 @@ const ResumeBuilderForm = ({
                   />
                 )}
 
-                {(activeStep.key === "summary" || activeStep.key === "professional_summary") && (
+                {(activeStep.key === "summary" ||
+                  activeStep.key === "professional_summary") && (
                   <ProfessionalSummaryForm
                     data={resumeData.professional_summary}
                     onChange={(v) =>
@@ -251,20 +253,25 @@ const ResumeBuilderForm = ({
                     }
                     onTitleChange={(newTitle) => {
                       // 1. Update Local State (Immediate UI feedback)
-                      setResumeData(prev => ({
+                      setResumeData((prev) => ({
                         ...prev,
                         sections_obj: {
                           ...prev.sections_obj,
-                          [activeStep.key]: { ...prev.sections_obj[activeStep.key], title: newTitle }
-                        }
+                          [activeStep.key]: {
+                            ...prev.sections_obj[activeStep.key],
+                            title: newTitle,
+                          },
+                        },
                       }));
 
                       // 2. Dispatch to Redux (Sync with Preview/Store)
-                      dispatch(updateSection({ 
-                        id: activeStep.key, 
-                        field: 'title', 
-                        value: newTitle 
-                      }));
+                      dispatch(
+                        updateSection({
+                          id: activeStep.key,
+                          field: "title",
+                          value: newTitle,
+                        }),
+                      );
                     }}
                   />
                 )}

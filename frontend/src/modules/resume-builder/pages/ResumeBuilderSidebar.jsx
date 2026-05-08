@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { Layout, Eye } from 'lucide-react';
+import { Link } from "react-router-dom";
+import { Layout, Eye } from "lucide-react";
 
 const ResumeBuilderSidebar = ({
   sidebarRef,
@@ -7,15 +7,23 @@ const ResumeBuilderSidebar = ({
   activeIndex,
   setActiveIndex,
   showMobilePreview,
-  setShowMobilePreview
+  setShowMobilePreview,
 }) => {
   return (
-    <aside ref={sidebarRef} className="w-full lg:w-[15%] lg:min-w-[220px] bg-[#0f172a] text-white flex flex-col shrink-0 z-20 h-auto lg:h-full border-b lg:border-b-0">
+    <aside
+      ref={sidebarRef}
+      className="w-full lg:w-[15%] lg:min-w-[220px] bg-[#0f172a] text-white flex flex-col shrink-0 z-20 h-auto lg:h-full border-b lg:border-b-0"
+    >
       {/* Branding */}
       <div className="p-4 lg:p-6 border-b lg:border-r border-slate-800 flex items-center justify-between shrink-0">
-        <Link to="/resume/dashboard" className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors">
+        <Link
+          to="/resume/dashboard"
+          className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors"
+        >
           <Layout className="w-6 h-6" />
-          <span className="text-lg font-bold tracking-tight text-white hidden sm:inline lg:inline">Builder</span>
+          <span className="text-lg font-bold tracking-tight text-white hidden sm:inline lg:inline">
+            Builder
+          </span>
         </Link>
 
         {/* Mobile Preview Toggle */}
@@ -23,7 +31,7 @@ const ResumeBuilderSidebar = ({
           onClick={() => setShowMobilePreview(!showMobilePreview)}
           className="lg:hidden text-white bg-indigo-600 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-2"
         >
-          <Eye size={14} /> {showMobilePreview ? 'Edit' : 'Preview'}
+          <Eye size={14} /> {showMobilePreview ? "Edit" : "Preview"}
         </button>
       </div>
 
@@ -38,12 +46,16 @@ const ResumeBuilderSidebar = ({
               key={step.key}
               onClick={() => setActiveIndex(index)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 
-                  ${isActive
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-900/20'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
-                } shrink-0 lg:shrink`}>
-              <span className={`flex items-center justify-center w-6 h-6 rounded-full text-xs border 
-                  ${isActive ? 'border-white text-indigo-600 bg-white font-bold' : 'border-slate-600'}`}>
+                  ${
+                    isActive
+                      ? "bg-indigo-600 text-white shadow-lg shadow-indigo-900/20"
+                      : "text-slate-400 hover:text-white hover:bg-slate-800"
+                  } shrink-0 lg:shrink`}
+            >
+              <span
+                className={`flex items-center justify-center w-6 h-6 rounded-full text-xs border 
+                  ${isActive ? "border-white text-indigo-600 bg-white font-bold" : "border-slate-600"}`}
+              >
                 {index + 1}
               </span>
               <div className="flex flex-col items-start truncate hidden sm:flex">
