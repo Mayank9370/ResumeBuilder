@@ -28,7 +28,7 @@ const HomePage = () => {
             <footer className="bg-white border-t border-slate-100 py-6">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
                     <p className="text-sm text-slate-400 font-medium">
-                        © {new Date().getFullYear()} Resume Builder. All rights reserved.
+                        © {new Date().getFullYear()} Resume Builder. Built with ❤️. All rights reserved.
                     </p>
                     <div className="flex items-center gap-5 text-sm text-slate-400">
                         <span className="hover:text-slate-600 cursor-pointer transition-colors">Privacy</span>
